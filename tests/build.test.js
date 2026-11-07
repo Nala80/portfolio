@@ -9,11 +9,15 @@ import { build } from '../scripts/build.mjs';
 
 const PUBLIC_DIR = fileURLToPath(new URL('../public', import.meta.url));
 
+const EXPECTED_ROUTES = ['index.html'];
+
 test('the build writes every page, the stylesheet and the public assets to the output folder', async () => {
   const outDir = await mkdtemp(path.join(os.tmpdir(), 'portfolio-build-'));
   try {
     const routes = await build({ outDir });
-    assert.ok(routes.includes('index.html'), 'home page is part of the build');
+    for (const route of EXPECTED_ROUTES) {
+      assert.ok(routes.includes(route), `${route} is part of the build`);
+    }
     for (const route of routes) {
       const file = path.join(outDir, ...route.split('/'));
       assert.ok(existsSync(file), `${route} was written`);
