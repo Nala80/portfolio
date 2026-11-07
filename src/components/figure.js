@@ -20,9 +20,10 @@ const MAX_SIDE_BY_SIDE_RATIO = 1.6;
  * One or more figures. A pair of compact (near-square) figures sits side by
  * side on wide screens; wide charts always get the full width.
  */
-export function figureGroup(figures, { root } = {}) {
+export function figureGroup(figures, { root, stack = false } = {}) {
   if (!figures?.length) return null;
-  const sideBySide = figures.length === 2 && figures.every((item) => item.width / item.height <= MAX_SIDE_BY_SIDE_RATIO);
+  const sideBySide =
+    !stack && figures.length === 2 && figures.every((item) => item.width / item.height <= MAX_SIDE_BY_SIDE_RATIO);
   return html`<div class="figure-grid${sideBySide ? ' figure-grid--two' : ''}">
   ${figures.map((item) => figure(item, { root }))}
 </div>`;

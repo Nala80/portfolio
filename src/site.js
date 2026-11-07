@@ -3,10 +3,12 @@
 
 import { homePage } from './pages/home.js';
 import { nlrPage } from './pages/nlr.js';
+import { pricePage } from './pages/price.js';
 
 export const ROUTES = {
   'index.html': homePage,
   'projects/nlr/index.html': nlrPage,
+  'projects/price/index.html': pricePage,
 };
 
 /** @returns {Record<string, string>} route -> HTML */

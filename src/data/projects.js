@@ -30,7 +30,7 @@ export const projects = [
       { value: '20', label: 'weeks, three days a week' },
     ],
     tags: ['Dashboard', 'Sensor data', 'Data visualisation'],
-    caseStudy: null,
+    caseStudy: 'projects/price/',
   },
   {
     id: 'classmatch',
