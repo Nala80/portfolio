@@ -1,0 +1,117 @@
+/* Inline SVG diagrams. Strokes and fills come from the theme tokens. */
+.diagram-figure {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.diagram-figure figcaption {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.diagram {
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+}
+
+.diagram text {
+  fill: var(--text-muted);
+  font-size: 15px;
+}
+
+/* Cross-section */
+.xs-outside {
+  fill: transparent;
+  stroke: var(--border);
+  stroke-dasharray: 4 4;
+}
+
+.xs-roof {
+  fill: var(--border-strong);
+}
+
+.xs-insulation {
+  fill: var(--surface-raised);
+}
+
+.xs-hatch {
+  stroke: var(--border-strong);
+  stroke-width: 2;
+}
+
+.xs-room {
+  fill: var(--bg);
+  stroke: var(--border);
+}
+
+.cross-section .xs-layer-label {
+  fill: var(--text);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--surface-raised);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+
+.xs-probe {
+  stroke: var(--text-faint);
+  stroke-width: 2;
+}
+
+.xs-leader {
+  stroke: var(--text-faint);
+  stroke-dasharray: 3 3;
+}
+
+.xs-sensor circle {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 3;
+}
+
+.cross-section .xs-sensor-label {
+  fill: var(--text);
+}
+
+.xs-sensor-id {
+  font-weight: 700;
+  fill: var(--accent);
+}
+
+.cross-section .xs-axis {
+  fill: var(--text-faint);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* Radar template */
+.diagram-figure--radar {
+  padding-inline: var(--space-3);
+}
+
+.radar-ring {
+  fill: none;
+  stroke: var(--border);
+}
+
+.radar-ring--outer {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.radar-axis {
+  stroke: var(--border-strong);
+}
+
+.radar-centre {
+  fill: var(--text-faint);
+}
+
+.radar .radar-label {
+  fill: var(--text);
+}
