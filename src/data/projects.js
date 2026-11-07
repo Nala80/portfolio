@@ -15,7 +15,7 @@ export const projects = [
       { value: '+1.22', label: 'workload score in Climb' },
     ],
     tags: ['Python', 'Random Forest', 'ARIMA', 'Research'],
-    caseStudy: null,
+    caseStudy: 'projects/nlr/',
   },
   {
     id: 'price',
@@ -46,3 +46,13 @@ export const projects = [
     caseStudy: null,
   },
 ];
+
+/** The case studies before and after the given project, in display order. */
+export function neighbours(id) {
+  const withCaseStudy = projects.filter((project) => project.caseStudy);
+  const index = withCaseStudy.findIndex((project) => project.id === id);
+  return {
+    previous: index > 0 ? withCaseStudy[index - 1] : null,
+    next: index >= 0 && index < withCaseStudy.length - 1 ? withCaseStudy[index + 1] : null,
+  };
+}

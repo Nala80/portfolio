@@ -9,7 +9,7 @@ import { build } from '../scripts/build.mjs';
 
 const PUBLIC_DIR = fileURLToPath(new URL('../public', import.meta.url));
 
-const EXPECTED_ROUTES = ['index.html'];
+const EXPECTED_ROUTES = ['index.html', 'projects/nlr/index.html'];
 
 test('the build writes every page, the stylesheet and the public assets to the output folder', async () => {
   const outDir = await mkdtemp(path.join(os.tmpdir(), 'portfolio-build-'));
