@@ -1,24 +1,57 @@
 import { html } from '../components/html.js';
 import { page } from '../components/page.js';
-import { profile } from '../data/profile.js';
+import { hero } from '../components/hero.js';
+import { section } from '../components/section.js';
+import { projectCard } from '../components/projectCard.js';
+import { skills } from '../components/skills.js';
+import { educationList, experienceTimeline } from '../components/background.js';
+import { education, experience, interests, profile } from '../data/profile.js';
+import { projects } from '../data/projects.js';
+import { otherSkills, technicalSkills } from '../data/skills.js';
 
 export function homePage() {
+  const root = './';
+
   const content = html`<div class="container">
-  <section class="section">
-    <div class="section__header">
-      <h1 class="section__title">${profile.name}</h1>
-      <p class="section__intro">${profile.role}</p>
+  ${hero({ profile, root })}
+
+  ${section({
+    id: 'projects',
+    eyebrow: 'Selected work',
+    title: 'Projects',
+    intro: 'Research, a sensor dashboard and a scheduling application: from raw data to software people use.',
+    content: html`<div class="project-grid">${projects.map((project, index) => projectCard(project, { root, index }))}</div>`,
+  })}
+
+  ${section({
+    id: 'skills',
+    eyebrow: 'Toolbox',
+    title: 'Technical skills',
+    content: skills({ technical: technicalSkills, other: otherSkills }),
+  })}
+
+  ${section({
+    id: 'background',
+    eyebrow: 'Background',
+    title: 'Education & experience',
+    content: html`<div class="background">
+      <div class="background__column">
+        <h3 class="background__heading">Education</h3>
+        ${educationList(education)}
+      </div>
+      <div class="background__column">
+        <h3 class="background__heading">Experience</h3>
+        ${experienceTimeline(experience)}
+      </div>
     </div>
-  </section>
-  <section class="section" id="projects"><h2 class="section__title">Projects</h2></section>
-  <section class="section" id="skills"><h2 class="section__title">Skills</h2></section>
-  <section class="section" id="background"><h2 class="section__title">Background</h2></section>
+    <p class="interests"><span class="interests__label">Outside of study:</span> ${interests.join(' · ')}</p>`,
+  })}
 </div>`;
 
   return page({
     title: `${profile.name} — ${profile.role}`,
-    description: `Portfolio of ${profile.name}, ${profile.role}.`,
-    root: './',
+    description: `Portfolio of ${profile.name}, final-year HBO-ICT student focused on software and data. Projects, technical skills and background.`,
+    root,
     profile,
     content,
   });
