@@ -68,39 +68,62 @@
   opacity: 0.92;
 }
 
+/* Key figures and the process line sit directly under the header */
 .case-study > .stats {
-  padding-bottom: var(--space-5);
+  padding-bottom: var(--space-6);
 }
 
-/* Process steps: plain text blocks side by side */
-.steps {
-  display: grid;
-  gap: var(--space-6);
+/* Process at a glance: "Clean & merge → Engineer features → Analyse → Model" */
+.flow ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) 0;
   padding: 0;
   list-style: none;
+  font-size: var(--text-sm);
 }
 
-@media (min-width: 700px) {
-  .steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6) var(--space-7);
-  }
+.flow li:not(:last-child)::after {
+  content: '→';
+  margin-inline: 0.75em;
+  color: var(--text-faint);
 }
 
-.step__title {
-  margin-bottom: var(--space-2);
-  font-size: var(--text-base);
-}
-
-.step__text {
+.flow a {
   color: var(--text-muted);
+  text-decoration: none;
 }
 
-/* Data overview */
-.data-note {
+.flow a:hover {
+  color: var(--text-strong);
+}
+
+/* Chapters: prose first, then the evidence that backs it */
+.chapter__body {
   display: grid;
-  gap: var(--space-5);
-  max-width: var(--measure);
+  gap: var(--space-6);
+}
+
+/* One highlighted result per chapter: larger, brighter text, nothing around it */
+.highlight {
+  max-width: 36rem;
+  color: var(--text-strong);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.chapter .figure {
+  max-width: 52rem;
+}
+
+/* Data overview: "10 sessions × 6 pilots × 6 files = ~360 CSV files" */
+.data-overview {
+  display: grid;
+  gap: var(--space-3);
 }
 
 .data-equation {
@@ -112,7 +135,7 @@
 }
 
 .data-equation__term strong {
-  margin-right: 0.15em;
+  margin-right: 0.2em;
   font-size: var(--text-xl);
   letter-spacing: -0.02em;
 }
@@ -121,150 +144,15 @@
   color: var(--text-faint);
 }
 
-.data-note__label {
-  margin-bottom: var(--space-1);
+.data-files {
   color: var(--text-faint);
   font-size: var(--text-sm);
 }
 
-.data-note__text {
+.data-files code {
   color: var(--text-muted);
-}
-
-.tag--mono {
   font-family: var(--font-mono);
-  font-size: 0.92em;
-}
-
-/* Results */
-.results {
-  display: grid;
-  gap: var(--space-8);
-}
-
-.result {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.result__text {
-  display: grid;
-  gap: var(--space-3);
-  max-width: var(--measure);
-  color: var(--text-muted);
-}
-
-.result__title {
-  font-size: var(--text-xl);
-  letter-spacing: -0.025em;
-}
-
-.result__takeaway {
-  color: var(--text);
-  font-size: var(--text-lg);
-  line-height: 1.55;
-}
-
-.result__list {
-  display: grid;
-  gap: var(--space-2);
-  padding-left: 1.1rem;
-}
-
-.result__list li::marker {
-  color: var(--text-faint);
-}
-
-/* Text columns */
-.columns {
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 760px) {
-  .columns {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6) var(--space-7);
-  }
-}
-
-@media (min-width: 1100px) {
-  .columns:has(> :nth-child(3):last-child) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.column__title {
-  margin-bottom: var(--space-2);
-  font-size: var(--text-base);
-}
-
-.column__text {
-  color: var(--text-muted);
-}
-
-.column__text + .column__text {
-  margin-top: var(--space-3);
-}
-
-.column__list {
-  display: grid;
-  gap: var(--space-2);
-  padding-left: 1.1rem;
-  color: var(--text-muted);
-}
-
-.column__list li::marker {
-  color: var(--text-faint);
-}
-
-/* Two-part layouts: text beside a diagram */
-.split {
-  display: grid;
-  gap: var(--space-6);
-  align-items: start;
-}
-
-@media (min-width: 1000px) {
-  .split {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--space-7);
-  }
-
-  .split--even {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Timeline: three dated moments in a row */
-.h-timeline {
-  display: grid;
-  gap: var(--space-5);
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 700px) {
-  .h-timeline {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-6);
-  }
-}
-
-.h-timeline__date {
-  color: var(--text-faint);
-  font-size: var(--text-sm);
-  font-variant-numeric: tabular-nums;
-}
-
-.h-timeline__title {
-  margin-block: var(--space-1);
-  font-size: var(--text-base);
-}
-
-.h-timeline__text {
-  color: var(--text-muted);
-  font-size: var(--text-sm);
+  font-size: 0.95em;
 }
 
 /* Previous / next */

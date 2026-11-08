@@ -88,6 +88,10 @@
   font-style: italic;
 }
 
+.diagram-figure--cross-section {
+  max-width: 32rem;
+}
+
 /* Radar template */
 .diagram-figure--radar {
   max-width: 34rem;

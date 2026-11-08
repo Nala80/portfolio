@@ -63,7 +63,8 @@
 }
 
 .tag-list li {
-  display: inline;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .tag-list li:not(:last-child)::after {
@@ -93,11 +94,18 @@
   list-style: none;
 }
 
+/* The label comes first in the markup (read first by screen readers) but the
+   number is shown on top, so all numbers in a row line up. */
 .stat {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  justify-content: flex-start;
   gap: var(--space-1);
   max-width: 14rem;
+}
+
+.stat__value {
+  order: -1;
 }
 
 .stat__value {
@@ -115,6 +123,15 @@
   line-height: 1.5;
 }
 
+/* Large key figures: a 2 × 2 grid on phones, one row when there is room */
+@media (max-width: 640px) {
+  .stats--large {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-5);
+  }
+}
+
 .stats--large .stat__value {
   font-size: var(--text-xl);
 }
@@ -129,12 +146,6 @@
 
 .prose strong {
   color: var(--text);
-}
-
-.lead {
-  color: var(--text);
-  font-size: var(--text-lg);
-  line-height: 1.6;
 }
 
 /* Figures: charts made on white sit on a soft light backdrop, nothing else */
@@ -158,16 +169,4 @@
   color: var(--text-faint);
   font-size: var(--text-sm);
   line-height: 1.55;
-}
-
-.figure-grid {
-  display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 900px) {
-  .figure-grid--two {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
 }

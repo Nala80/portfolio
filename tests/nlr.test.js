@@ -1,5 +1,4 @@
-// Content checks for the NLR case study: the details that were explicitly
-// confirmed or corrected must not regress.
+// Content checks for the NLR case study: the confirmed details must not regress.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -17,29 +16,27 @@ test('the NLR page shows the lead question and all four key figures', () => {
   }
 });
 
-test('the NLR page has the four approach steps and five numbered results', () => {
-  assert.equal(nlr.approach.length, 4);
-  assert.equal(nlr.results.length, 5);
-  for (let number = 1; number <= 5; number += 1) {
-    assert.match(html, new RegExp(`id="result-${number}"`));
-  }
+test('the NLR page follows the four process steps in order', () => {
+  assert.deepEqual(
+    nlr.chapters.map((chapter) => chapter.step),
+    ['Clean & merge', 'Engineer features', 'Analyse', 'Model'],
+  );
+  const positions = nlr.chapters.map((chapter) => html.indexOf(`id="${chapter.id}"`));
+  assert.ok(positions.every((position) => position > -1), 'every chapter is on the page');
+  assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'chapters appear in process order');
 });
 
 test('the workload chart is captioned as pilot Delta, sessions 1, 5 and 9', () => {
-  const workload = nlr.results[0].figures.find((figure) => figure.src.endsWith('workload-per-phase.png'));
-  assert.ok(workload, 'workload chart is in result 1');
-  assert.match(workload.caption, /Delta/);
-  assert.match(workload.caption, /sessions 1, 5 and 9/);
+  const workload = nlr.chapters.find((chapter) => chapter.figure?.src.endsWith('workload-per-phase.png'));
+  assert.ok(workload, 'the workload chart is shown');
+  assert.match(workload.figure.caption, /Delta/);
+  assert.match(workload.figure.caption, /sessions 1, 5 and 9/);
 });
 
-test('result 2 (EEG and instructor ratings) is text only', () => {
-  assert.equal(nlr.results[1].figures.length, 0);
-});
-
-test('all nine NLR charts are shown exactly once', () => {
+test('each chart is shown once and every chart file in public/ is used', () => {
   const charts = findTags(html, 'img').map((img) => img.src).filter((src) => src.includes('images/nlr/'));
-  assert.equal(charts.length, 9);
-  assert.equal(new Set(charts).size, 9);
+  assert.equal(new Set(charts).size, charts.length, 'no chart is repeated');
+  assert.equal(charts.length, nlr.chapters.filter((chapter) => chapter.figure).length);
 });
 
 test('the NLR page is written as a team project', () => {

@@ -1,10 +1,14 @@
-// Building blocks shared by the case-study pages.
+// Building blocks shared by the case-study pages. A case study reads as an
+// article: a header, a quiet process overview, then chapters of prose, each
+// backed by one piece of evidence (a figure or a highlighted result).
 
 import { html } from './html.js';
+import { figure } from './figure.js';
 import { stats } from './stats.js';
 import { tagList } from './tags.js';
+import { section } from './section.js';
 
-export function caseHeader({ root, title, meta, lead, intro, tags, aside }) {
+export function caseHeader({ root, title, meta, lead, tags, aside }) {
   return html`<header class="case-header">
   <a class="back-link" href="${root}#projects"><span aria-hidden="true">←</span> All projects</a>
   <div class="case-header__grid">
@@ -12,7 +16,6 @@ export function caseHeader({ root, title, meta, lead, intro, tags, aside }) {
       <h1 class="case-header__title">${title}</h1>
       <p class="case-header__meta">${meta.join(' · ')}</p>
       ${lead ? html`<p class="case-header__lead">${lead}</p>` : null}
-      ${intro ? html`<p class="case-header__lead">${intro}</p>` : null}
       ${tagList(tags, { label: 'Topics' })}
     </div>
     ${aside ? html`<div class="case-header__aside">${aside}</div>` : null}
@@ -20,33 +23,34 @@ export function caseHeader({ root, title, meta, lead, intro, tags, aside }) {
 </header>`;
 }
 
-/** Process steps as short text blocks side by side (stacked on small screens). */
-export function stepList(steps) {
-  return html`<ol class="steps">
-  ${steps.map(
-    (step) => html`<li class="step">
-    <h3 class="step__title">${step.title}</h3>
-    <p class="step__text">${step.text}</p>
-  </li>`,
-  )}
-</ol>`;
-}
-
-/** Text columns with a small heading each. */
-export function panelGrid(panels, { headingLevel = 3 } = {}) {
-  return html`<div class="columns">
-  ${panels.map(
-    (panel) => html`<div class="column">
-    ${headingLevel === 3 ? html`<h3 class="column__title">${panel.title}</h3>` : html`<h4 class="column__title">${panel.title}</h4>`}
-    ${panel.text ? html`<p class="column__text">${panel.text}</p>` : null}
-    ${panel.items ? html`<ul class="column__list">${panel.items.map((item) => html`<li>${item}</li>`)}</ul>` : null}
-  </div>`,
-  )}
-</div>`;
-}
-
 export function keyFigures(figures) {
   return stats(figures, { large: true, label: 'Key figures' });
+}
+
+/** The process at a glance: step names joined by arrows, each linking to its chapter. */
+export function processFlow(chapters) {
+  return html`<nav class="flow" aria-label="Process">
+  <ol>${chapters.map((chapter) => html`<li><a href="#${chapter.id}">${chapter.step}</a></li>`)}</ol>
+</nav>`;
+}
+
+/**
+ * One chapter of the story: prose, an optional highlighted result and an
+ * optional figure, plus any extra content (e.g. a diagram) after the text.
+ */
+export function chapter({ id, title, paragraphs = [], highlight, figure: chapterFigure, extra, after, root }) {
+  return section({
+    id,
+    title,
+    className: 'chapter',
+    content: html`<div class="chapter__body">
+      <div class="prose">${paragraphs.map((paragraph) => html`<p>${paragraph}</p>`)}</div>
+      ${extra}
+      ${highlight ? html`<p class="highlight">${highlight}</p>` : null}
+      ${chapterFigure ? figure(chapterFigure, { root }) : null}
+      ${after}
+    </div>`,
+  });
 }
 
 /** Links to the previous/next case study and back to the overview. */
