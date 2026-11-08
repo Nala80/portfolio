@@ -20,10 +20,10 @@ Requires Node.js 20 or newer. There is no `npm install` step.
 ```
 src/
   data/          Content as plain JS objects: profile, projects, skills, nlr, price
-  components/    Small functions that turn data into HTML (hero, project card, figure, …)
+  components/    Small functions that turn data into HTML (hero, project entry, figure, …)
     diagrams/    Inline SVG diagrams (PRICE cross-section, radar template)
   pages/         One function per page, composing components with data
-  styles/        Hand-written CSS, concatenated in filename order (01-tokens … 08-diagrams)
+  styles/        Hand-written CSS, concatenated in filename order (01-tokens … 07-diagrams)
   site.js        The route table: which pages exist and where they are written
 scripts/
   build.mjs      Copies public/, bundles the CSS, renders every route into dist/
@@ -60,7 +60,7 @@ folder:
 | `external.test.js`  | No resource loads from other hosts; the only off-site links are LinkedIn and GitHub |
 | `links.test.js`     | Every internal link and `#anchor` resolves; element ids are unique              |
 | `assets.test.js`    | Every referenced image exists in `public/`; every `<img>` has alt text and dimensions |
-| `projects.test.js`  | Project cards follow the data order; every case-study link points to a generated page |
+| `projects.test.js`  | Projects follow the data order; every case-study link points to a generated page |
 | `pages.test.js`     | Each page is a complete English document with one `<h1>` and a `<main>`         |
 | `nlr.test.js`       | Confirmed NLR details (e.g. the Delta caption, text-only EEG section) stay correct |
 | `price.test.js`     | Diagrams are accessible SVG; radar labels fit the viewBox; no claimed results   |

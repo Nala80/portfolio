@@ -1,16 +1,18 @@
-/* Inline SVG diagrams. Strokes and fills come from the theme tokens. */
+/* Inline SVG diagrams. Layers are told apart by tone, not by outlines. */
 .diagram-figure {
   display: grid;
   gap: var(--space-3);
-  padding: var(--space-5);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
 }
 
 .diagram-figure figcaption {
-  color: var(--text-muted);
+  max-width: var(--measure);
+  color: var(--text-faint);
   font-size: var(--text-sm);
+}
+
+.diagram-figure figcaption strong {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .diagram {
@@ -26,34 +28,31 @@
 
 /* Cross-section */
 .xs-outside {
-  fill: transparent;
-  stroke: var(--border);
-  stroke-dasharray: 4 4;
+  fill: rgb(255 255 255 / 0.015);
 }
 
 .xs-roof {
-  fill: var(--border-strong);
+  fill: rgb(255 255 255 / 0.24);
 }
 
 .xs-insulation {
-  fill: var(--surface-raised);
+  fill: rgb(255 255 255 / 0.06);
 }
 
 .xs-hatch {
-  stroke: var(--border-strong);
+  stroke: rgb(255 255 255 / 0.1);
   stroke-width: 2;
 }
 
 .xs-room {
-  fill: var(--bg);
-  stroke: var(--border);
+  fill: rgb(255 255 255 / 0.03);
 }
 
 .cross-section .xs-layer-label {
   fill: var(--text);
   font-weight: 600;
   paint-order: stroke;
-  stroke: var(--surface-raised);
+  stroke: #1b1b1c;
   stroke-width: 6px;
   stroke-linejoin: round;
 }
@@ -64,12 +63,12 @@
 }
 
 .xs-leader {
-  stroke: var(--text-faint);
-  stroke-dasharray: 3 3;
+  stroke: var(--rule-strong);
+  stroke-dasharray: 3 4;
 }
 
 .xs-sensor circle {
-  fill: var(--accent);
+  fill: var(--text-strong);
   stroke: var(--bg);
   stroke-width: 3;
 }
@@ -80,7 +79,7 @@
 
 .xs-sensor-id {
   font-weight: 700;
-  fill: var(--accent);
+  fill: var(--text-strong);
 }
 
 .cross-section .xs-axis {
@@ -91,21 +90,20 @@
 
 /* Radar template */
 .diagram-figure--radar {
-  padding-inline: var(--space-3);
+  max-width: 34rem;
 }
 
 .radar-ring {
   fill: none;
-  stroke: var(--border);
+  stroke: var(--rule);
 }
 
 .radar-ring--outer {
-  stroke: var(--border-strong);
-  stroke-width: 1.5;
+  stroke: var(--rule-strong);
 }
 
 .radar-axis {
-  stroke: var(--border-strong);
+  stroke: var(--rule-strong);
 }
 
 .radar-centre {
