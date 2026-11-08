@@ -62,8 +62,9 @@ folder:
 | `assets.test.js`    | Every referenced image exists in `public/`; every `<img>` has alt text and dimensions |
 | `projects.test.js`  | Projects follow the data order; every case-study link points to a generated page |
 | `pages.test.js`     | Each page is a complete English document with one `<h1>` and a `<main>`         |
-| `nlr.test.js`       | Confirmed NLR details (e.g. the Delta caption, text-only EEG section) stay correct |
-| `price.test.js`     | Diagrams are accessible SVG; radar labels fit the viewBox; no claimed results   |
+| `case-studies.test.js` | Case studies are prose chapters linked from a process line; no bullet lists or numbered labels |
+| `nlr.test.js`       | Confirmed NLR details stay correct: key figures, process order, the Delta caption, team voice |
+| `price.test.js`     | Diagrams are accessible SVG; radar labels fit the viewBox; wireframes left out; no claimed results |
 | `deploy.test.js`    | CI tests before building; no `npm install`; `public/CNAME` is valid once added  |
 | `html.test.js`      | The escaping template behaves as intended                                       |
 

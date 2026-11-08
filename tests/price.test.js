@@ -2,24 +2,25 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 import { price } from '../src/data/price.js';
 import { RADAR, radarLayout } from '../src/components/diagrams/radar.js';
-import { findTags, pages, visibleText } from './helpers.js';
+import { PUBLIC_DIR, findTags, pages, visibleText } from './helpers.js';
 
 const html = pages['projects/price/index.html'];
 const text = visibleText(html);
 
-test('the PRICE page shows the intro, the logo and both wireframes', () => {
+test('the PRICE page shows the intro and the logo', () => {
   assert.ok(text.includes(price.intro));
-  const sources = findTags(html, 'img').map((img) => img.src);
-  for (const file of ['logo.png', 'wireframe-materials.png', 'wireframe-data.png']) {
-    assert.ok(sources.some((src) => src.endsWith(`images/price/${file}`)), `${file} is shown`);
-  }
+  assert.ok(findTags(html, 'img').some((img) => img.src.endsWith('images/price/logo.png')));
 });
 
-test('the temperature wireframe is labelled as illustrative data', () => {
-  const data = price.wireframes.find((wireframe) => wireframe.src.endsWith('wireframe-data.png'));
-  assert.match(data.caption, /illustrative data/i);
+test('the wireframes are left out of the page and the repository', () => {
+  assert.doesNotMatch(html, /wireframe/i);
+  const priceImages = readdirSync(path.join(PUBLIC_DIR, 'images', 'price'));
+  assert.deepEqual(priceImages.filter((file) => /wireframe/i.test(file)), []);
+  assert.ok(!existsSync(path.join(PUBLIC_DIR, 'images', 'price', 'wireframe-data.png')));
 });
 
 test('the page has the cross-section and radar diagrams as accessible inline SVG', () => {
@@ -59,6 +60,6 @@ test('every radar axis label fits inside the SVG viewBox', () => {
 });
 
 test('the PRICE page does not claim results', () => {
-  assert.doesNotMatch(text, /\b(we|I) (achieved|delivered|reduced|increased|improved)\b/i);
+  assert.doesNotMatch(text, /\b(we|I) (achieved|delivered|reduced|increased|improved|evaluated|advised)\b/i);
   assert.equal((text.match(/JavaScript/g) ?? []).length, 1, 'the tech stack is mentioned once');
 });
