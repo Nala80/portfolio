@@ -2,7 +2,7 @@ import { html } from '../components/html.js';
 import { page } from '../components/page.js';
 import { section } from '../components/section.js';
 import { figureGroup } from '../components/figure.js';
-import { caseHeader, caseStudyNav, keyFigures, onThisPage, panelGrid, stepList } from '../components/caseStudy.js';
+import { caseHeader, caseStudyNav, keyFigures, panelGrid, stepList } from '../components/caseStudy.js';
 import { profile } from '../data/profile.js';
 import { nlr } from '../data/nlr.js';
 import { neighbours } from '../data/projects.js';
@@ -30,7 +30,6 @@ function resultSection(result, index, { root }) {
   const id = `result-${number}`;
   return html`<article class="result" id="${id}" aria-labelledby="${id}-title">
   <div class="result__text">
-    <p class="result__number" aria-hidden="true">${String(number).padStart(2, '0')}</p>
     <h3 class="result__title" id="${id}-title">${result.title}</h3>
     <p class="result__takeaway"><strong>${result.takeaway}</strong></p>
     ${result.paragraphs.map((paragraph) => html`<p>${paragraph}</p>`)}
@@ -56,16 +55,9 @@ export function nlrPage() {
 
   ${keyFigures(nlr.keyFigures)}
 
-  ${onThisPage([
-    { id: 'approach', label: 'Approach' },
-    { id: 'data', label: 'The data' },
-    { id: 'results', label: 'Results' },
-    { id: 'reflection', label: 'Ethics, limitations & recommendations' },
-  ])}
 
   ${section({
     id: 'approach',
-    eyebrow: 'Method',
     title: 'Approach in four steps',
     intro: 'We worked as a team of five on every step, from raw sensor exports to a predictive model.',
     content: stepList(nlr.approach),
@@ -73,14 +65,12 @@ export function nlrPage() {
 
   ${section({
     id: 'data',
-    eyebrow: 'Input',
     title: 'The data',
     content: dataNote(nlr.data),
   })}
 
   ${section({
     id: 'results',
-    eyebrow: 'Findings',
     title: 'Results',
     intro: 'Five findings, each with its takeaway first. The charts come from our research paper, so their labels are in Dutch.',
     content: html`<div class="results">${nlr.results.map((result, index) => resultSection(result, index, { root }))}</div>`,
@@ -88,7 +78,6 @@ export function nlrPage() {
 
   ${section({
     id: 'reflection',
-    eyebrow: 'Reflection',
     title: 'Ethics, limitations & recommendations',
     content: panelGrid(nlr.reflection),
   })}

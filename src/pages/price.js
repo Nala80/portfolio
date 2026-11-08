@@ -3,7 +3,7 @@ import { page } from '../components/page.js';
 import { section } from '../components/section.js';
 import { figureGroup } from '../components/figure.js';
 import { stats } from '../components/stats.js';
-import { caseHeader, caseStudyNav, onThisPage, panelGrid } from '../components/caseStudy.js';
+import { caseHeader, caseStudyNav, panelGrid } from '../components/caseStudy.js';
 import { crossSectionDiagram } from '../components/diagrams/crossSection.js';
 import { radarTemplate } from '../components/diagrams/radar.js';
 import { profile } from '../data/profile.js';
@@ -34,23 +34,13 @@ export function pricePage() {
     meta: [price.organisation, price.period],
     intro: price.intro,
     tags: price.tags,
-    aside: html`<div class="logo-chip"><img src="${root}${logo.src}" alt="${logo.alt}" width="${logo.width}" height="${logo.height}"></div>`,
+    aside: html`<img class="case-logo" src="${root}${logo.src}" alt="${logo.alt}" width="${logo.width}" height="${logo.height}">`,
   })}
 
   ${stats(price.facts, { label: 'Project facts' })}
 
-  ${onThisPage([
-    { id: 'setup', label: 'The test setup' },
-    { id: 'sensors', label: 'What the sensors measure' },
-    { id: 'assignment', label: 'The assignment' },
-    { id: 'radar', label: 'Material analysis' },
-    { id: 'wireframes', label: 'Wireframes' },
-    { id: 'planning', label: 'Planning' },
-  ])}
-
   ${section({
     id: 'setup',
-    eyebrow: 'Context',
     title: 'The test setup',
     content: html`<div class="split">
       <div class="prose">
@@ -66,27 +56,22 @@ export function pricePage() {
 
   ${section({
     id: 'sensors',
-    eyebrow: 'Data sources',
     title: 'What the sensors measure',
-    content: html`<div class="grid-2x2">${panelGrid(price.sensors)}</div>`,
+    content: html`${panelGrid(price.sensors)}`,
   })}
 
   ${section({
     id: 'assignment',
-    eyebrow: 'Brief',
     title: 'The assignment',
     content: html`<div class="split split--even">
-      <div class="panel">
-        <h3 class="panel__title">What was asked</h3>
-        <ol class="numbered-list">${price.assignment.map((item) => html`<li>${item}</li>`)}</ol>
+      <div class="column">
+        <h3 class="column__title">What was asked</h3>
+        <ul class="column__list">${price.assignment.map((item) => html`<li>${item}</li>`)}</ul>
       </div>
-      <div class="choice-list">
-        <h3 class="choice-list__title">Extra assignments we chose</h3>
+      <div class="column">
+        <h3 class="column__title">Extra assignments we chose</h3>
         ${price.extraAssignments.map(
-          (item) => html`<div class="choice">
-          <h4 class="choice__title">${item.title}</h4>
-          <p class="choice__text">${item.text}</p>
-        </div>`,
+          (item) => html`<p class="column__text"><strong>${item.title}.</strong> ${item.text}</p>`,
         )}
       </div>
     </div>`,
@@ -94,7 +79,6 @@ export function pricePage() {
 
   ${section({
     id: 'radar',
-    eyebrow: 'Extra assignment',
     title: 'Material analysis: the radar chart',
     intro: 'Every material gets the same six sustainability axes, so the four can be compared at a glance. The template below shows the axes only; it holds no scores.',
     content: html`<div class="split">
@@ -102,13 +86,12 @@ export function pricePage() {
         ${radarTemplate({ axes: price.radar.axes })}
         <figcaption>Template: six axes, no values.</figcaption>
       </figure>
-      <ul class="note-list">${price.radar.notes.map((note) => html`<li>${note}</li>`)}</ul>
+      <div class="prose">${price.radar.notes.map((note) => html`<p>${note}</p>`)}</div>
     </div>`,
   })}
 
   ${section({
     id: 'wireframes',
-    eyebrow: 'Design',
     title: 'Wireframes',
     // Wireframes hold small text, so they always get the full width.
     content: figureGroup(price.wireframes, { root, stack: true }),
@@ -116,7 +99,6 @@ export function pricePage() {
 
   ${section({
     id: 'planning',
-    eyebrow: 'Timeline',
     title: 'Planning',
     content: timeline(price.timeline),
   })}

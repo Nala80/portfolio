@@ -4,7 +4,6 @@
 
 export const profile = {
   name: 'Nalawi Woldeyohannes',
-  initials: 'NW',
   role: 'HBO-ICT student · Software & Data',
   tagline:
     'Final-year HBO-ICT student who enjoys building functional, user-friendly software and turning data into insight. Looking for an internship in an international environment.',
@@ -53,9 +52,10 @@ export const experience = [
   { role: 'Courier', organisation: 'DHL', period: 'Feb 2025 – Jun 2025' },
 ];
 
+// Written to read as one sentence: "Outside of study: a, b, c and d."
 export const interests = [
-  'Emerging technologies (AI, data science, cloud)',
-  'Gaming & hardware',
-  'Volleyball & fitness',
-  'Piano',
+  'emerging technologies (AI, data science, cloud)',
+  'gaming and hardware',
+  'volleyball and fitness',
+  'piano',
 ];

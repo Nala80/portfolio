@@ -1,123 +1,94 @@
-/* Reusable building blocks: buttons, tags, cards, stats, figures */
+/* Reusable building blocks. None of them draws a box: they rely on type and space. */
 
-/* Buttons */
-.button-row {
+/* Calls to action: one solid button, everything else is a text link */
+.actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
 }
 
 .button {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
   min-height: 2.75rem;
   padding: 0 var(--space-5);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: var(--accent);
+  border-radius: 999px;
+  background: var(--text-strong);
+  color: var(--bg);
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
-  transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease),
-    color var(--duration) var(--ease), transform var(--duration) var(--ease);
+  transition: background var(--duration) var(--ease), transform var(--duration) var(--ease);
 }
 
 .button:hover {
-  background: var(--surface-raised);
-  border-color: var(--text-faint);
+  background: #d4d4d8;
 }
 
 .button:active {
   transform: translateY(1px);
 }
 
-.button--primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-contrast);
+.text-link {
+  color: var(--text-strong);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
 }
 
-.button--primary:hover {
-  background: #d9d9dd;
-  border-color: #d9d9dd;
+.text-link .arrow {
+  display: inline-block;
+  margin-left: 0.3em;
+  color: var(--text-muted);
+  transition: transform var(--duration) var(--ease), color var(--duration) var(--ease);
 }
 
-/* Tags */
+.text-link:hover .arrow {
+  transform: translateX(3px);
+  color: var(--text-strong);
+}
+
+.text-link--external:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Lists that read as running text: "Python, Random Forest, ARIMA".
+   Inline items with trailing commas wrap like a normal sentence. */
 .tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
   padding: 0;
   list-style: none;
-}
-
-.tag {
-  display: inline-block;
-  padding: 0.2rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  background: var(--surface-raised);
-  color: var(--text-muted);
-  font-size: var(--text-xs);
-  line-height: 1.6;
-  white-space: nowrap;
-}
-
-.tag--status {
-  border-color: var(--border-strong);
-  background: transparent;
-  color: var(--accent);
-}
-
-.tag--status::before {
-  content: '';
-  display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-right: 0.45rem;
-  border-radius: 50%;
-  background: var(--accent);
-  vertical-align: 0.05em;
-}
-
-/* Cards */
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
-}
-
-.card--interactive:hover {
-  border-color: var(--border-strong);
-  background: var(--surface-raised);
-}
-
-.card__title {
-  font-size: var(--text-lg);
-}
-
-.card__meta {
   color: var(--text-faint);
   font-size: var(--text-sm);
 }
 
-.card__body {
-  color: var(--text-muted);
+.tag-list li {
+  display: inline;
 }
 
-/* Key figures */
+.tag-list li:not(:last-child)::after {
+  content: ',';
+  margin-right: 0.4em;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+
+.status {
+  color: var(--text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Key figures: a large number over a short label, no frame */
 .stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
-  gap: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) var(--space-7);
   padding: 0;
   list-style: none;
 }
@@ -125,62 +96,68 @@
 .stat {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: flex-end;
   gap: var(--space-1);
-  padding: var(--space-4);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface-raised);
+  max-width: 14rem;
 }
 
 .stat__value {
-  color: var(--accent);
+  color: var(--text-strong);
   font-size: var(--text-lg);
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1.2;
+  letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
 
 .stat__label {
-  color: var(--text-muted);
+  color: var(--text-faint);
   font-size: var(--text-xs);
-  line-height: 1.45;
-}
-
-.stats--large .stat {
-  padding: var(--space-5);
+  line-height: 1.5;
 }
 
 .stats--large .stat__value {
   font-size: var(--text-xl);
 }
 
-/* Figures: charts and wireframes made on white sit on a light "paper" card */
+/* Running text */
+.prose {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--measure);
+  color: var(--text-muted);
+}
+
+.prose strong {
+  color: var(--text);
+}
+
+.lead {
+  color: var(--text);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+/* Figures: charts made on white sit on a soft light backdrop, nothing else */
 .figure {
   display: grid;
   gap: var(--space-3);
 }
 
 .figure__frame {
-  padding: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 1rem);
   border-radius: var(--radius);
   background: var(--paper);
-  border: 1px solid var(--border);
 }
 
 .figure__frame img {
   width: 100%;
-  border-radius: 4px;
 }
 
 .figure figcaption {
-  color: var(--text-muted);
+  max-width: var(--measure);
+  color: var(--text-faint);
   font-size: var(--text-sm);
   line-height: 1.55;
-}
-
-.figure figcaption strong {
-  color: var(--text);
 }
 
 .figure-grid {
@@ -193,29 +170,4 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
   }
-}
-
-/* Panels: quiet bordered text blocks */
-.panel {
-  padding: var(--space-5);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.panel__title {
-  margin-bottom: var(--space-3);
-  font-size: var(--text-base);
-}
-
-.panel ul {
-  display: grid;
-  gap: var(--space-2);
-  padding-left: 1.1rem;
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-}
-
-.panel li::marker {
-  color: var(--text-faint);
 }

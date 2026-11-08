@@ -2,12 +2,15 @@ import { html } from '../components/html.js';
 import { page } from '../components/page.js';
 import { hero } from '../components/hero.js';
 import { section } from '../components/section.js';
-import { projectCard } from '../components/projectCard.js';
+import { projectList } from '../components/project.js';
 import { skills } from '../components/skills.js';
-import { educationList, experienceTimeline } from '../components/background.js';
+import { educationList, experienceList } from '../components/background.js';
 import { education, experience, interests, profile } from '../data/profile.js';
 import { projects } from '../data/projects.js';
 import { otherSkills, technicalSkills } from '../data/skills.js';
+
+/** ['a', 'b', 'c'] -> "a, b and c" */
+const listSentence = (items) => (items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
 
 export function homePage() {
   const root = './';
@@ -17,34 +20,31 @@ export function homePage() {
 
   ${section({
     id: 'projects',
-    eyebrow: 'Selected work',
     title: 'Projects',
     intro: 'Research, a sensor dashboard and a scheduling application: from raw data to software people use.',
-    content: html`<div class="project-grid">${projects.map((project, index) => projectCard(project, { root, index }))}</div>`,
+    content: projectList(projects, { root }),
   })}
 
   ${section({
     id: 'skills',
-    eyebrow: 'Toolbox',
-    title: 'Technical skills',
+    title: 'Skills',
     content: skills({ technical: technicalSkills, other: otherSkills }),
   })}
 
   ${section({
     id: 'background',
-    eyebrow: 'Background',
-    title: 'Education & experience',
+    title: 'Background',
     content: html`<div class="background">
-      <div class="background__column">
+      <div class="background__group">
         <h3 class="background__heading">Education</h3>
         ${educationList(education)}
       </div>
-      <div class="background__column">
+      <div class="background__group">
         <h3 class="background__heading">Experience</h3>
-        ${experienceTimeline(experience)}
+        ${experienceList(experience)}
       </div>
-    </div>
-    <p class="interests"><span class="interests__label">Outside of study:</span> ${interests.join(' · ')}</p>`,
+      <p class="interests">Outside of study: ${listSentence(interests)}.</p>
+    </div>`,
   })}
 </div>`;
 
