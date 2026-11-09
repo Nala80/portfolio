@@ -1,6 +1,6 @@
 // Generates the static site into dist/.
 //
-//   1. copy public/ as-is (images, favicon, later the CNAME file)
+//   1. copy public/ as-is (images, favicon, the CNAME file)
 //   2. bundle src/styles/*.css into dist/assets/site.css (files are concatenated
 //      in filename order, which is why they carry a numeric prefix)
 //   3. render every page from src/site.js and write it to dist/<route>
