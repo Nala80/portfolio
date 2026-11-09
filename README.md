@@ -60,7 +60,7 @@ folder:
 | `external.test.js`  | No resource loads from other hosts; the only off-site link is LinkedIn |
 | `links.test.js`     | Every internal link and `#anchor` resolves; element ids are unique              |
 | `assets.test.js`    | Every referenced image exists in `public/`; every `<img>` has alt text and dimensions |
-| `projects.test.js`  | Projects are in chronological order; every case-study link points to a generated page |
+| `projects.test.js`  | Projects are listed newest first; every case-study link points to a generated page |
 | `pages.test.js`     | Each page is a complete English document with one `<h1>` and a `<main>`         |
 | `case-studies.test.js` | Case studies are prose chapters linked from a process line and end with a plain-prose reflection; no bullet lists or numbered labels |
 | `nlr.test.js`       | Confirmed NLR details stay correct: key figures, process order, the Delta caption, team voice |

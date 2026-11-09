@@ -1,21 +1,19 @@
-// Project summaries for the home page, in chronological order (by start date).
+// Project summaries for the home page, newest first (by start date).
 // `caseStudy` is the route of the project's own page, or null if it has none.
 
 export const projects = [
   {
-    id: 'price',
-    title: 'PRICE Hub sensor dashboard',
-    organisation: 'PRICE Co-Makership (Internship), Almere',
-    period: 'Jan 2025 – Jun 2025',
+    id: 'classmatch',
+    title: 'ClassMatch',
+    organisation: 'Info Support, Veenendaal',
+    period: 'Sep 2026 – Present',
     summary:
-      "A dashboard that shows visitors of the exhibition 'I am material' how biobased insulation materials really perform, built on live sensor data from four roof test setups.",
-    figures: [
-      { value: 'Lead', label: 'developer role' },
-      { value: '4', label: 'biobased materials' },
-      { value: '20', label: 'weeks, three days a week' },
-    ],
-    tags: ['Dashboard', 'Sensor data', 'Data visualisation'],
-    caseStudy: 'projects/price/',
+      'Scheduling application for primary schools that updates timetables when staff are absent, to minimise lesson disruption. Explores schedule recalculation and explainable suggestions, helping schedulers compare internal staff moves with external cover.',
+    note: 'Ongoing project, so details follow later.',
+    status: 'Work in progress',
+    figures: [],
+    tags: ['Scheduling', 'Explainable suggestions'],
+    caseStudy: null,
   },
   {
     id: 'nlr',
@@ -33,17 +31,19 @@ export const projects = [
     caseStudy: 'projects/nlr/',
   },
   {
-    id: 'classmatch',
-    title: 'ClassMatch',
-    organisation: 'Info Support, Veenendaal',
-    period: 'Sep 2026 – Present',
+    id: 'price',
+    title: 'PRICE Hub sensor dashboard',
+    organisation: 'PRICE Co-Makership (Internship), Almere',
+    period: 'Jan 2025 – Jun 2025',
     summary:
-      'Scheduling application for primary schools that updates timetables when staff are absent, to minimise lesson disruption. Explores schedule recalculation and explainable suggestions, helping schedulers compare internal staff moves with external cover.',
-    note: 'Ongoing project, so details follow later.',
-    status: 'Work in progress',
-    figures: [],
-    tags: ['Scheduling', 'Explainable suggestions'],
-    caseStudy: null,
+      "A dashboard that shows visitors of the exhibition 'I am material' how biobased insulation materials really perform, built on live sensor data from four roof test setups.",
+    figures: [
+      { value: 'Lead', label: 'developer role' },
+      { value: '4', label: 'biobased materials' },
+      { value: '20', label: 'weeks, three days a week' },
+    ],
+    tags: ['Dashboard', 'Sensor data', 'Data visualisation'],
+    caseStudy: 'projects/price/',
   },
 ];
 
