@@ -1,5 +1,5 @@
 // The site makes no requests to other hosts: no CDNs, web fonts, trackers or
-// embeds. The only links that leave the site are LinkedIn and GitHub.
+// embeds. The only link that leaves the site is LinkedIn.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -7,10 +7,7 @@ import { css, findTags, pages, resolveUrl } from './helpers.js';
 
 // Deliberately written out here instead of read from src/data/profile.js, so a
 // change to the data can never silently widen what is allowed.
-const ALLOWED_LINKS = [
-  (url) => url.href === 'https://www.linkedin.com/in/nalawi-woldeyohannes',
-  (url) => url.origin === 'https://github.com' && /^\/Nala80(\/|$)/.test(url.pathname),
-];
+const ALLOWED_LINKS = [(url) => url.href === 'https://www.linkedin.com/in/nalawi-woldeyohannes'];
 
 // Elements and attributes that make the browser fetch something.
 const RESOURCE_ATTRIBUTES = {
@@ -48,7 +45,7 @@ for (const [route, html] of Object.entries(pages)) {
     assert.doesNotMatch(html, /http-equiv="refresh"/i, 'no meta refresh redirects');
   });
 
-  test(`${route} only links off-site to LinkedIn and GitHub`, () => {
+  test(`${route} only links off-site to LinkedIn`, () => {
     for (const { href } of findTags(html, 'a')) {
       if (href === undefined) continue;
       const resolved = resolveUrl(route, href);

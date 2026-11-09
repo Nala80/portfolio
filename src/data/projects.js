@@ -1,22 +1,7 @@
-// Project summaries for the cards on the home page, in display order.
+// Project summaries for the home page, in chronological order (by start date).
 // `caseStudy` is the route of the project's own page, or null if it has none.
 
 export const projects = [
-  {
-    id: 'nlr',
-    title: 'Physiological signals & flight performance',
-    organisation: 'MITC (NLR), Marknesse',
-    period: 'Feb 2025 – Jun 2026',
-    summary:
-      'Five-student data science team project. We analysed EEG, heart rate, pupil size and blink rate of student pilots to find which signals best explain how well they fly their exercises.',
-    figures: [
-      { value: '~360', label: 'CSV files cleaned & merged' },
-      { value: 'R² 0.43', label: 'Random Forest on test data' },
-      { value: '+1.22', label: 'workload score in Climb' },
-    ],
-    tags: ['Python', 'Random Forest', 'ARIMA', 'Research'],
-    caseStudy: 'projects/nlr/',
-  },
   {
     id: 'price',
     title: 'PRICE Hub sensor dashboard',
@@ -31,6 +16,21 @@ export const projects = [
     ],
     tags: ['Dashboard', 'Sensor data', 'Data visualisation'],
     caseStudy: 'projects/price/',
+  },
+  {
+    id: 'nlr',
+    title: 'Physiological signals & flight performance',
+    organisation: 'MITC (NLR), Marknesse',
+    period: 'Feb 2025 – Jun 2026',
+    summary:
+      'Five-student data science team project. We analysed EEG, heart rate, pupil size and blink rate of student pilots to find which signals best explain how well they fly their exercises.',
+    figures: [
+      { value: '~360', label: 'CSV files cleaned & merged' },
+      { value: 'R² 0.43', label: 'Random Forest on test data' },
+      { value: '+1.22', label: 'workload score in Climb' },
+    ],
+    tags: ['Python', 'Random Forest', 'ARIMA', 'Research'],
+    caseStudy: 'projects/nlr/',
   },
   {
     id: 'classmatch',

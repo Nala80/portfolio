@@ -5,12 +5,9 @@ import { section } from '../components/section.js';
 import { projectList } from '../components/project.js';
 import { skills } from '../components/skills.js';
 import { educationList, experienceList } from '../components/background.js';
-import { education, experience, interests, profile } from '../data/profile.js';
+import { education, experience, profile } from '../data/profile.js';
 import { projects } from '../data/projects.js';
 import { otherSkills, technicalSkills } from '../data/skills.js';
-
-/** ['a', 'b', 'c'] -> "a, b and c" */
-const listSentence = (items) => (items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
 
 export function homePage() {
   const root = './';
@@ -21,7 +18,7 @@ export function homePage() {
   ${section({
     id: 'projects',
     title: 'Projects',
-    intro: 'Research, a sensor dashboard and a scheduling application: from raw data to software people use.',
+    intro: 'A sensor dashboard, research and a scheduling application: from raw data to software people use.',
     content: projectList(projects, { root }),
   })}
 
@@ -43,7 +40,6 @@ export function homePage() {
         <h3 class="background__heading">Experience</h3>
         ${experienceList(experience)}
       </div>
-      <p class="interests">Outside of study: ${listSentence(interests)}.</p>
     </div>`,
   })}
 </div>`;

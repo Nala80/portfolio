@@ -13,6 +13,19 @@ test('the home page shows every project, in the order of the data file', () => {
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'cards follow the data order');
 });
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** "Feb 2025 – Jun 2026" -> 2025.08 (start date as a sortable number) */
+function startOf(period) {
+  const [, month, year] = period.match(/^([A-Z][a-z]{2}) (\d{4})/);
+  return Number(year) + MONTHS.indexOf(month) / 12;
+}
+
+test('projects are listed in chronological order, oldest first', () => {
+  const starts = projects.map((project) => startOf(project.period));
+  assert.deepEqual([...starts].sort((a, b) => a - b), starts);
+});
+
 test('every project link points to a page that is actually generated', () => {
   for (const project of projects.filter((p) => p.caseStudy)) {
     const target = resolveUrl('index.html', project.caseStudy).target;

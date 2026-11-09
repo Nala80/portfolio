@@ -4,11 +4,9 @@ import { externalLink } from './link.js';
 export function siteFooter({ profile, year }) {
   return html`<footer class="site-footer">
   <div class="container site-footer__inner">
-    <p>© ${year} ${profile.name} · ${profile.location}</p>
+    <p>© ${year} ${profile.name}</p>
     <ul class="site-footer__links">
       <li>${externalLink({ href: profile.links.linkedin, label: 'LinkedIn' })}</li>
-      <li>${externalLink({ href: profile.links.github, label: 'GitHub' })}</li>
-      <li>${externalLink({ href: profile.links.source, label: 'Source of this site' })}</li>
     </ul>
   </div>
 </footer>`;
