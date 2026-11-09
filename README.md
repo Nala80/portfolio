@@ -3,7 +3,7 @@
 Personal portfolio site: a static site generated from data files with plain Node.js.
 No framework, no build tool and no dependencies — a clean checkout runs straight away.
 
-**Live:** https://nala80.github.io/portfolio/
+**Live:** https://www.nalawi.info/
 
 ## Commands
 
@@ -29,7 +29,7 @@ scripts/
   build.mjs      Copies public/, bundles the CSS, renders every route into dist/
   serve.mjs      Tiny static server for local preview
 tests/           node:test checks (see below)
-public/          Static assets copied as-is: images, favicon, later the CNAME file
+public/          Static assets copied as-is: images, favicon, the CNAME file
 .github/workflows/deploy.yml   CI: test → build → deploy to GitHub Pages
 ```
 
@@ -44,7 +44,7 @@ public/          Static assets copied as-is: images, favicon, later the CNAME fi
   (`src/components/html.js`) that escapes every interpolated value unless it is itself
   HTML from another component, so content can never break the markup.
 - **Relative links everywhere.** Every page knows its depth (`root`), so the same build
-  works at `nala80.github.io/portfolio/` and later at the custom domain.
+  works at `nala80.github.io/portfolio/` and at `www.nalawi.info`.
 - **Zero dependencies.** Nothing to install, nothing to update, nothing that can break the
   build in a year. Node's standard library covers file handling, the dev server and testing.
 
@@ -65,7 +65,7 @@ folder:
 | `case-studies.test.js` | Case studies are prose chapters linked from a process line and end with a plain-prose reflection; no bullet lists or numbered labels |
 | `nlr.test.js`       | Confirmed NLR details stay correct: key figures, process order, the Delta caption, team voice |
 | `price.test.js`     | Diagrams are accessible SVG; the example radar is labelled illustrative and its labels fit the viewBox; wireframes left out; no claimed results |
-| `deploy.test.js`    | CI tests before building; no `npm install`; `public/CNAME` is valid once added  |
+| `deploy.test.js`    | CI tests before building; no `npm install`; `public/CNAME` holds a bare domain name    |
 | `html.test.js`      | The escaping template behaves as intended                                       |
 
 ## Deploying to GitHub Pages
@@ -76,39 +76,35 @@ tests on Node 20, 22 and 24, then a build. Pushes to `main` are also deployed.
 One-time setup: in the repository go to **Settings → Pages → Build and deployment** and set
 **Source** to **GitHub Actions**. After that every merge into `main` publishes the site.
 
-## Custom domain (`nalawi.info`) — once the domain is bought
+## Custom domain (`www.nalawi.info`)
 
-Do these steps only after owning the domain.
+The site is served by GitHub Pages at `www.nalawi.info`; the domain is registered at
+mijn.host. The bare domain `nalawi.info` and the old `nala80.github.io/portfolio/`
+address both redirect to `www`.
 
-1. **Add `public/CNAME`** containing one line, just the domain:
-   ```
-   nalawi.info
-   ```
-   The build copies it into `dist/`. GitHub Pages reads it to know which domain the site
-   answers to. (`deploy.test.js` checks the file holds a bare domain.)
-2. **Set the DNS records at the registrar.** For the apex domain `nalawi.info`, add four
-   `A` records (and optionally four `AAAA` records for IPv6):
+- **`public/CNAME`** holds the domain (`www.nalawi.info`). Because this site deploys
+  with GitHub Actions, GitHub Pages does not read the file: the domain that counts is the
+  one in **Settings → Pages → Custom domain**. The file records the domain in the
+  repository, and `deploy.test.js` checks it holds a bare domain name.
+- **DNS records at mijn.host** (DNS settings of `nalawi.info`):
 
-   | Type   | Name | Value                  |
-   | ------ | ---- | ---------------------- |
-   | `A`    | `@`  | `185.199.108.153`      |
-   | `A`    | `@`  | `185.199.109.153`      |
-   | `A`    | `@`  | `185.199.110.153`      |
-   | `A`    | `@`  | `185.199.111.153`      |
-   | `AAAA` | `@`  | `2606:50c0:8000::153`  |
-   | `AAAA` | `@`  | `2606:50c0:8001::153`  |
-   | `AAAA` | `@`  | `2606:50c0:8002::153`  |
-   | `AAAA` | `@`  | `2606:50c0:8003::153`  |
-   | `CNAME`| `www`| `nala80.github.io`     |
+  | Type    | Name  | Value                  |
+  | ------- | ----- | ---------------------- |
+  | `CNAME` | `www` | `nala80.github.io`     |
+  | `A`     | `@`   | `185.199.108.153`      |
+  | `A`     | `@`   | `185.199.109.153`      |
+  | `A`     | `@`   | `185.199.110.153`      |
+  | `A`     | `@`   | `185.199.111.153`      |
+  | `AAAA`  | `@`   | `2606:50c0:8000::153`  |
+  | `AAAA`  | `@`   | `2606:50c0:8001::153`  |
+  | `AAAA`  | `@`   | `2606:50c0:8002::153`  |
+  | `AAAA`  | `@`   | `2606:50c0:8003::153`  |
 
-   Remove any default parking records the registrar created for `@` and `www`.
-   Check GitHub's current list at docs.github.com → "Managing a custom domain for your
-   GitHub Pages site" before adding them.
-3. **Enter the domain in Settings → Pages → Custom domain** (`nalawi.info`) and save.
-   GitHub runs a DNS check; propagation can take up to 24 hours.
-4. **Tick "Enforce HTTPS"** on the same page once the certificate is issued (the box is
-   greyed out until then, usually within an hour of the DNS check passing).
-5. Optional: verify the domain under your GitHub account settings → Pages, so nobody else
-   can claim it for their Pages site.
+  No other `A`, `AAAA` or `CNAME` records for `@` or `www` (such as the host's
+  default parking records) may stay next to these. Records for email (`MX`, `TXT`) are
+  unaffected. GitHub's current list of addresses is at docs.github.com → "Managing a
+  custom domain for your GitHub Pages site".
+- **HTTPS**: "Enforce HTTPS" is ticked in Settings → Pages. GitHub issues and renews the
+  certificate itself.
 
 Because all links are relative, no code changes are needed when the domain goes live.
