@@ -68,6 +68,17 @@ export const price = {
       ['Reuse /', 'disassembly'],
       ['Recycled', 'content'],
     ],
-    caption: 'The radar template with its six axes, shown without scores.',
+    // Illustrative values (0 = least, 1 = most sustainable), chosen to show how
+    // a filled-in chart reads. They are NOT measured scores for any material.
+    example: [0.72, 0.58, 0.86, 0.64, 0.47, 0.38],
+    title: 'Example radar chart with six sustainability axes',
+    description: 'A filled-in example with illustrative values, not measured scores for any of the materials.',
+    caption: 'What a filled-in radar looks like. The values here are illustrative, not measured scores for any of the four materials.',
   },
+
+  // Plain paragraphs, in the same voice as the NLR reflection.
+  reflection: [
+    'What made this project different from most school work is that we did not start from an empty repository. The dashboard was already there, built by ROC Flevoland students, and because it is a relay assignment it gets handed over again after us. In that situation, readable code and a clear explanation of the “why” matter just as much as new features, because someone else has to pick it up.',
+    'It also meant keeping in mind who the dashboard is for. Visitors of an exhibition are not engineers, so a temperature line or a moisture value only helps when it tells them something about the material. A radar chart per material fits that idea, as long as it is clear that it gives an indicative picture and not a full life-cycle assessment.',
+  ],
 };

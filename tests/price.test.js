@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { price } from '../src/data/price.js';
-import { RADAR, radarLayout } from '../src/components/diagrams/radar.js';
+import { RADAR, radarChart, radarLayout } from '../src/components/diagrams/radar.js';
 import { PUBLIC_DIR, findTags, pages, visibleText } from './helpers.js';
 
 const html = pages['projects/price/index.html'];
@@ -35,12 +35,27 @@ test('the page has the cross-section and radar diagrams as accessible inline SVG
   assert.match(html, /T3<\/tspan> · inner edge/);
 });
 
-test('the radar template has six axes and no scores', () => {
+test('the radar shows a filled example on six axes, labelled as illustrative', () => {
   assert.equal(price.radar.axes.length, 6);
   const radar = html.slice(html.indexOf('class="diagram radar"'));
   const svg = radar.slice(0, radar.indexOf('</svg>'));
   assert.equal([...svg.matchAll(/class="radar-axis"/g)].length, 6);
-  assert.doesNotMatch(svg, /radar-score|radar-value/, 'no data polygon');
+
+  const area = findTags(svg, 'polygon').find((polygon) => polygon.class === 'radar-shape__area');
+  assert.ok(area, 'the example shape is drawn');
+  assert.equal(area.points.split(' ').length, 6, 'one corner per axis');
+  assert.equal(price.radar.example.length, 6);
+  assert.ok(price.radar.example.every((value) => value >= 0 && value <= 1), 'values are fractions of the radius');
+
+  // The example values are made up, so the page must say so.
+  assert.match(price.radar.caption, /illustrative/i);
+  assert.match(price.radar.description, /illustrative/i);
+  assert.ok(text.includes(price.radar.caption));
+});
+
+test('the radar refuses values that do not fit its axes', () => {
+  assert.throws(() => radarChart({ axes: price.radar.axes, values: [0.5, 0.5] }), /one value between 0 and 1 per axis/);
+  assert.throws(() => radarChart({ axes: price.radar.axes, values: [1.2, 0, 0, 0, 0, 0] }), /between 0 and 1/);
 });
 
 test('every radar axis label fits inside the SVG viewBox', () => {

@@ -53,6 +53,16 @@ export function chapter({ id, title, paragraphs = [], highlight, figure: chapter
   });
 }
 
+/** Closing reflection: a few plain paragraphs under one heading. */
+export function reflection(paragraphs) {
+  return section({
+    id: 'reflection',
+    title: 'Looking back',
+    className: 'chapter',
+    content: html`<div class="prose">${paragraphs.map((paragraph) => html`<p>${paragraph}</p>`)}</div>`,
+  });
+}
+
 /** Links to the previous/next case study and back to the overview. */
 export function caseStudyNav({ root, previous, next }) {
   const item = (label, href, title, direction) => html`<a class="case-nav__link case-nav__link--${direction}" href="${href}">
