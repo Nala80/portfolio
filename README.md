@@ -57,10 +57,10 @@ folder:
 | ------------------- | ------------------------------------------------------------------------------- |
 | `build.test.js`     | The home, NLR and PRICE pages, the CSS bundle and `public/` all end up in the output |
 | `privacy.test.js`   | No email address, phone number, `mailto:` or `tel:` in any page, the CSS or `public/` text files |
-| `external.test.js`  | No resource loads from other hosts; the only off-site links are LinkedIn and GitHub |
+| `external.test.js`  | No resource loads from other hosts; the only off-site link is LinkedIn |
 | `links.test.js`     | Every internal link and `#anchor` resolves; element ids are unique              |
 | `assets.test.js`    | Every referenced image exists in `public/`; every `<img>` has alt text and dimensions |
-| `projects.test.js`  | Projects follow the data order; every case-study link points to a generated page |
+| `projects.test.js`  | Projects are in chronological order; every case-study link points to a generated page |
 | `pages.test.js`     | Each page is a complete English document with one `<h1>` and a `<main>`         |
 | `case-studies.test.js` | Case studies are prose chapters linked from a process line; no bullet lists or numbered labels |
 | `nlr.test.js`       | Confirmed NLR details stay correct: key figures, process order, the Delta caption, team voice |

@@ -1,13 +1,13 @@
 // Personal details shown on the site.
-// Privacy rule: no email address or phone number here, ever. tests/privacy.test.js
-// fails the build if one shows up in the generated HTML.
+// Privacy rules: no email address, phone number or home location here, ever.
+// tests/privacy.test.js fails the build if an email or phone number shows up
+// in the generated HTML. LinkedIn is the only contact route.
 
 export const profile = {
   name: 'Nalawi Woldeyohannes',
   role: 'HBO-ICT student · Software & Data',
   tagline:
-    'Final-year HBO-ICT student who enjoys building functional, user-friendly software and turning data into insight. Looking for an internship in an international environment.',
-  location: 'Purmerend, Netherlands',
+    'Final-year HBO-ICT student who enjoys building functional, user-friendly software and turning data into insight.',
   photo: {
     src: 'images/profile.png',
     alt: 'Portrait of Nalawi Woldeyohannes',
@@ -16,8 +16,6 @@ export const profile = {
   },
   links: {
     linkedin: 'https://www.linkedin.com/in/nalawi-woldeyohannes',
-    github: 'https://github.com/Nala80',
-    source: 'https://github.com/Nala80/portfolio',
   },
 };
 
@@ -25,7 +23,7 @@ export const education = [
   {
     degree: 'HBO-ICT (BSc)',
     school: 'Windesheim University of Applied Sciences',
-    period: '2023 – 2026 (expected)',
+    period: '2023 – 2027 (expected)',
     coursework: [
       'Software Engineering',
       'Databases',
@@ -50,12 +48,4 @@ export const experience = [
     description: 'Guided a group of MBO students during a two-day hackathon commissioned by Brightcare ICT.',
   },
   { role: 'Courier', organisation: 'DHL', period: 'Feb 2025 – Jun 2025' },
-];
-
-// Written to read as one sentence: "Outside of study: a, b, c and d."
-export const interests = [
-  'emerging technologies (AI, data science, cloud)',
-  'gaming and hardware',
-  'volleyball and fitness',
-  'piano',
 ];

@@ -67,7 +67,7 @@ test('the detector does not flag the figures used on the site', () => {
     'R² 0.43 (Random Forest on test data)',
     '+1.22 workload score in Climb',
     'r = 0.55 pupil size vs altitude error (session 5)',
-    '2023 – 2026 (expected)',
+    '2023 – 2027 (expected)',
     '10 sessions × 6 pilots × 6 files',
     'Alpha +2.66, Charlie +2.48, Foxtrot +2.12, Bravo +1.73, Echo +1.08 bpm per session; Delta −0.74',
     'PCA explains 41.8% + 24.5% of variance',
