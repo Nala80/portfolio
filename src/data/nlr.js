@@ -95,18 +95,10 @@ export const nlr = {
     },
   ],
 
+  // Plain paragraphs, written the way you would tell it, not as a checklist.
   reflection: [
-    {
-      lead: 'Ethics was part of the process.',
-      text: 'Calculated or imputed values must be labelled and never look like real measurements (the GDPR accuracy principle), imputation should happen only where necessary, and no conclusion about a person should be drawn automatically: the trainer keeps the final judgement.',
-    },
-    {
-      lead: 'The results have clear limits.',
-      text: 'There were few sessions and pilots, missing values and sensor noise, sessions 1, 5 and 9 were selected for several analyses, and the first analysis had no hard validation metrics.',
-    },
-    {
-      lead: 'That shaped our advice to NLR:',
-      text: 'automate cleaning, merging and export; label original versus imputed values; build dashboards per flight phase; validate results with trainers; collect more sessions before predicting; document model settings such as the number of clusters and ARIMA p/d/q; and make an ethics check a fixed step.',
-    },
+    'Because this is data about real people, we tried to handle it with care. A calculated or filled-in value should never pass for a real measurement (that is the GDPR accuracy principle), gaps should only be filled when there is no other way, and a model like ours should never be the one that judges a pilot. That call stays with the trainer.',
+    'We also know where our results stop. Ten sessions with six pilots is not a lot, the recordings had gaps and sensor noise, several analyses leaned on sessions 1, 5 and 9, and our first analysis did not have hard validation metrics yet. So we see what we found as a good starting point, not a final answer.',
+    'If NLR takes this further, our advice is to automate the cleaning and merging, keep original and filled-in values clearly apart, and look at the data per flight phase in dashboards. Checking the findings with trainers and collecting more sessions should come before anyone trusts a prediction. Writing down the model settings, such as the number of clusters and the ARIMA parameters, and making an ethics check a fixed step would make the work easier to repeat and build on.',
   ],
 };

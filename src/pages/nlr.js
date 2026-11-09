@@ -1,7 +1,6 @@
 import { html } from '../components/html.js';
 import { page } from '../components/page.js';
-import { section } from '../components/section.js';
-import { caseHeader, caseStudyNav, chapter, keyFigures, processFlow } from '../components/caseStudy.js';
+import { caseHeader, caseStudyNav, chapter, keyFigures, processFlow, reflection } from '../components/caseStudy.js';
 import { profile } from '../data/profile.js';
 import { nlr } from '../data/nlr.js';
 import { neighbours } from '../data/projects.js';
@@ -46,12 +45,7 @@ export function nlrPage() {
     }),
   )}
 
-  ${section({
-    id: 'reflection',
-    title: 'Looking back',
-    className: 'chapter',
-    content: html`<div class="prose">${nlr.reflection.map((part) => html`<p><strong>${part.lead}</strong> ${part.text}</p>`)}</div>`,
-  })}
+  ${reflection(nlr.reflection)}
 
   ${caseStudyNav({ root, previous, next })}
 </article>`;

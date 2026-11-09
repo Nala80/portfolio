@@ -114,6 +114,19 @@
   fill: var(--text-faint);
 }
 
+/* The filled shape: translucent purple so the rings stay visible through it */
+.radar-shape__area {
+  fill: var(--data);
+  fill-opacity: 0.32;
+  stroke: var(--data);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.radar-shape__point {
+  fill: var(--data-strong);
+}
+
 .radar .radar-label {
   fill: var(--text);
 }

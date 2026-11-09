@@ -38,4 +38,15 @@ for (const route of caseStudyRoutes) {
   test(`${route} uses no numbered labels`, () => {
     assert.doesNotMatch(main, />\s*0\d\s*</, 'no "01"-style labels');
   });
+
+  test(`${route} ends with a "Looking back" reflection in plain prose`, () => {
+    const start = main.indexOf('id="reflection"');
+    assert.ok(start > -1, 'has a reflection section');
+    const reflectionHtml = main.slice(start, main.indexOf('</section>', start));
+    assert.match(reflectionHtml, />Looking back</);
+    assert.ok((reflectionHtml.match(/<p>/g) ?? []).length >= 2, 'at least two paragraphs');
+    assert.doesNotMatch(reflectionHtml, /<strong>/, 'no bold lead-ins');
+    const nav = main.indexOf('class="case-nav"');
+    assert.ok(start < nav, 'the reflection comes before the previous/next links');
+  });
 }

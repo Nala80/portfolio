@@ -1,8 +1,8 @@
 import { html } from '../components/html.js';
 import { page } from '../components/page.js';
-import { caseHeader, caseStudyNav, chapter, keyFigures, processFlow } from '../components/caseStudy.js';
+import { caseHeader, caseStudyNav, chapter, keyFigures, processFlow, reflection } from '../components/caseStudy.js';
 import { crossSectionDiagram } from '../components/diagrams/crossSection.js';
-import { radarTemplate } from '../components/diagrams/radar.js';
+import { radarChart } from '../components/diagrams/radar.js';
 import { profile } from '../data/profile.js';
 import { price } from '../data/price.js';
 import { neighbours } from '../data/projects.js';
@@ -19,7 +19,7 @@ export function pricePage() {
       <figcaption><strong>Principle:</strong> ${price.chapters.find((c) => c.id === 'setup').principle}</figcaption>
     </figure>`,
     additions: html`<figure class="diagram-figure diagram-figure--radar">
-      ${radarTemplate({ axes: price.radar.axes })}
+      ${radarChart({ axes: price.radar.axes, values: price.radar.example, title: price.radar.title, description: price.radar.description })}
       <figcaption>${price.radar.caption}</figcaption>
     </figure>`,
   };
@@ -38,6 +38,8 @@ export function pricePage() {
   ${processFlow(price.chapters)}
 
   ${price.chapters.map((item) => chapter({ ...item, root, after: diagrams[item.id] }))}
+
+  ${reflection(price.reflection)}
 
   ${caseStudyNav({ root, previous, next })}
 </article>`;
