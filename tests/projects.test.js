@@ -21,9 +21,9 @@ function startOf(period) {
   return Number(year) + MONTHS.indexOf(month) / 12;
 }
 
-test('projects are listed in chronological order, oldest first', () => {
+test('projects are listed newest first', () => {
   const starts = projects.map((project) => startOf(project.period));
-  assert.deepEqual([...starts].sort((a, b) => a - b), starts);
+  assert.deepEqual([...starts].sort((a, b) => b - a), starts);
 });
 
 test('every project link points to a page that is actually generated', () => {
